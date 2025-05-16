@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentiment Analysis</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      #response {
+        margin-top: 20px;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sentiment Analysis Project</h1>
+    <button onclick="triggerAction('/generate')">Generate Data</button>
+    <button onclick="triggerAction('/preprocess')">Preprocess Data</button>
+    <button onclick="triggerAction('/analyze')">Analyze Sentiments</button>
+    <button onclick="triggerAction('/visualize')">Create Visualizations</button>
+    <div id="response"></div>
+    <script>
+      function triggerAction(endpoint) {
+        fetch(endpoint, { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("response").innerText = data.message;
+          })
+          .catch((err) => {
+            console.error(err);
+            document.getElementById("response").innerText =
+              "An error occurred!";
+          });
+      }
+    </script>
+  </body>
+</html>
